@@ -11,11 +11,11 @@ EXE: prog
 
 all: clean prog
 
-prog: main.o fichier.o
-	gcc -o $@ $^ -lm 
+prog: main.o fichier.o listeVO.o jeu.o 
+	gcc -std=c99 -Wall -Wextra -o $@ $^ -lm
 
 %.o: %.c
-	gcc -o $@ -c $<
+	gcc -std=c99 -Wall -Wextra -o $@ -c $<
 
 clean:
 	rm -f *.o prog
