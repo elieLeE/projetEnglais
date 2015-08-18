@@ -16,10 +16,11 @@ typedef struct config config;
  * - de 120 mots => 4 liste
  * entre 120 et 240 mots => 8... jusqu'à 128;
  * */
-#ifndef NBRE_LISTE
-#define NBRE_LISTE
+/*#ifndef NBRE_LISTE
+#define NBRE_LISTE*/
+int nbreMots;
 int nbreListe;
-#endif
+//#endif
 
 struct statistique{
     int nbreQuestion;

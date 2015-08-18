@@ -15,7 +15,7 @@ prog: main.o fichier.o listeVO.o jeu.o
 	gcc -std=c99 -Wall -Wextra -o $@ $^ -lm
 
 %.o: %.c
-	gcc -std=c99 -Wall -Wextra -o $@ -c $<
+	gcc -std=c99 -Wall -Wextra -o $@ -c $< -lm
 
 clean:
 	rm -f *.o prog

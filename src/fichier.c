@@ -6,8 +6,9 @@ void ouvertureFichiers(FILE *tab[], char* mode){
     char name[20];
     
     //fichiers de vocabulaire
-    for(i=0; i<NBRE_FICHIERS; i++){
-	sprintf(name, "../voc/voc%d", i);
+    for(i=0; i<nbreListe; i++){
+	//sprintf(name, "../voc/voc%d", i);
+	sprintf(name, "%s%d", SUFFIXE_VOC, i);
 	ouvertureFichier(&tab[i], name, mode);
     }
     
@@ -26,11 +27,31 @@ void ouvertureFichier(FILE** f, char *name, char* mode){
     }
 }
 
+void lectureFichierConfig(){
+    FILE* f = NULL;
+    ouvertureFichier(&f, FICHIER_CONFIG, "r+");
+    if(fscanf(f, "%d", &nbreMots)!=1){
+	fprintf(stderr, "erreur lecture fichier config\n");
+    }
+    int n = nbreMots/120;
+    if(n>5){
+	nbreListe = 128;
+    }
+    else{
+	nbreListe = pow(2, 2+n);
+    }
+    if(nbreListe > 128){
+	fprintf(stderr, "nbreListe > 128, %s, %d\n", __FILE__, __LINE__);
+	exit(0);
+    }
+    fclose(f);
+}
+
 void lectureFichiersVO(struct L_coupleVoc *tabHach){
     int i = 0;
     FILE *tabF[TAILLE_HACHTAB];
     ouvertureFichiers(tabF, "r");
-    for(i=0; i<NBRE_FICHIERS; i++){
+    for(i=0; i<nbreListe; i++){
 	lectureFichierVO(tabF[i], &tabHach[i]);
     }
     fermetureFichiers(tabF);
@@ -49,7 +70,7 @@ void ecritureFichiers(struct L_coupleVoc l[]){
     int i = 0;
     FILE *tabF[TAILLE_HACHTAB];
     ouvertureFichiers(tabF, "w+");
-    for(i=0; i<NBRE_FICHIERS; i++){
+    for(i=0; i<nbreListe; i++){
 	ecritureFichier(tabF[i], l[i]);
     }
     fermetureFichiers(tabF);
@@ -65,11 +86,11 @@ void ecritureFichier(FILE* f, struct L_coupleVoc l){
 
 void fermetureFichiers(FILE* tab[]){
     int i = 0;
-    for(i=0; i<NBRE_FICHIERS; i++){
+    for(i=0; i<nbreListe; i++){
 	fclose(tab[i]);
     }
 }
 
-void fermetureFichiersVI(FILE tab[NBRE_FICHIERS]){
+void fermetureFichiersVI(FILE tab[]){
 
 }

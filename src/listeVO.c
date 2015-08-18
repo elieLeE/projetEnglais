@@ -2,7 +2,7 @@
 
 void initStructsVO(struct L_coupleVoc l[]){
     int i = 0;
-    for(i=0; i<TAILLE_HACHTAB; i++){
+    for(i=0; i<nbreListe; i++){
 	l[i].nbreElem = 0;
 	l[i].first = NULL;
 	l[i].last = NULL;
@@ -26,11 +26,10 @@ void addFirstVO(struct L_coupleVoc *l, char* motFr, char* motEn){
 
 void visuHachTab(struct L_coupleVoc l[]){
     int i = 0;
-    for(i=0; i<5; i++){
+    for(i=0; i<nbreListe; i++){
 	printf("liste %d => ", i);
 	visuListeVO(l[i].first);
     }
-    printf("visuHachTab fini\n");
 }
 
 void visuListeVO(struct E_coupleVoc *e){
@@ -39,7 +38,6 @@ void visuListeVO(struct E_coupleVoc *e){
 	printf("\t%s, %s\n", p->motFr, p->motEn);
 	p = p->suiv;
     }
-    printf("visuListeVo fini\n");
     printf("\n");
 }
 
@@ -68,12 +66,12 @@ void moveElemVO(struct L_coupleVoc *l1, struct L_coupleVoc *l2){
 
 void freeStructures(struct L_coupleVoc *l){
     int i = 0;
-    for(i=0; i<127; i++){
+    for(i=0; i<nbreListe; i++){
 	freeStruct(&(l[i].first));
     }
 }
 
-void freeStruct(E_coupleVoc *l){
+void freeStruct(struct E_coupleVoc **l){
     struct E_coupleVoc *p = *l;
     while(*l != NULL){
 	p = *l;
