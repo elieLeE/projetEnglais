@@ -15,13 +15,21 @@ void addFirstVO(struct L_coupleVoc *l, char* motFr, char* motEn){
     memcpy(new->motEn, motEn, strlen(motEn)+1);
     new->suiv = NULL;
     l->nbreElem++;
-    if(l->first == NULL){
+    /*if(l->first == NULL){
 	l->first = new;
     }
     else{
         l->last->suiv = new;
     }
-    l->last = new;
+    l->last = new;*/
+
+    if(l->last == NULL){
+	l->last = new;
+    }
+    else{
+	new->suiv = l->first;
+    }
+    l->first = new;
 }
 
 void visuHachTab(struct L_coupleVoc l[]){
@@ -34,9 +42,16 @@ void visuHachTab(struct L_coupleVoc l[]){
 
 void visuListeVO(struct E_coupleVoc *e){
     struct E_coupleVoc *p = e;
-    while(p != NULL){
-	printf("\t%s, %s\n", p->motFr, p->motEn);
+    if(p == NULL){
+	printf("VIDE");
+    }
+    else{
+	printf("%s, %s\n", p->motFr, p->motEn);
 	p = p->suiv;
+	while(p != NULL){
+	    printf("\t   %s, %s\n", p->motFr, p->motEn);
+	    p = p->suiv;
+	}
     }
     printf("\n");
 }
@@ -79,4 +94,18 @@ void freeStruct(struct E_coupleVoc **l){
 	free(p);
     }
 }
-	
+
+struct E_coupleVoc* searchElem (struct L_coupleVoc *l, const char *s){
+    char motFr[20], motEn[20];
+    printf("Veuillez entrer les mots Francais et anglais associés au couple à %s.\n
+	    Il n'est pas nécessaire d'entrer les deux mais au moins l'un des deux devra l'etre\n", s);
+    printf("entrez le mot francais associé au couple à %s => ", s);
+    scanf("%s", motFr);
+    viderBuffeur();
+    printf("entrez le mot anglais associé au couple à %s => ", s);
+    scanf("%s", motEn);
+    viderBuffeur();
+
+    return NULL;
+
+}

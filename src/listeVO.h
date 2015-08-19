@@ -13,5 +13,6 @@ void visuHachTab(struct L_coupleVoc l[]);
 void visuListeVO(struct E_coupleVoc *e);
 void freeStructures(struct L_coupleVoc *l);
 void freeStruct(E_coupleVoc *l);
+struct E_coupleVoc* searchElem (struct L_coupleVoc *l);
 
 #endif

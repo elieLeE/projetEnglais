@@ -7,6 +7,7 @@
 #include "donnees.h"
 #include <time.h>
 #include <stdbool.h>
+#include "gestionStdin.h"
 
 #define NBRE_QUESTION 4
 
@@ -15,7 +16,6 @@ extern int nbreListe;
 
 int calculNewIndex(int oldIndex, bool rightAnswer);
 bool affMot(struct E_coupleVoc *w, int c);
-void viderBuffeur();
 void game(struct L_coupleVoc l[]);
 bool verifReponse(struct E_coupleVoc *w, char *c1, char *, bool c);
 bool compareChaines(char *c1, char* c2);

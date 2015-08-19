@@ -105,13 +105,7 @@ int choixMode(){
     return mode;
 }
 
-void viderBuffeur(){
-    int c = 0;
-    while (c != '\n' && c != EOF)
-    {
-        c = getchar();
-    }
-}
+
 
 E_coupleVoc choixMot(struct L_coupleVoc l[], int *index){
     int i =0, lim = 1000;

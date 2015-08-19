@@ -11,7 +11,7 @@ EXE: prog
 
 all: clean prog
 
-prog: main.o fichier.o listeVO.o jeu.o 
+prog: main.o fichier.o listeVO.o jeu.o menu.o gestionStdin.o
 	gcc -std=c99 -Wall -Wextra -o $@ $^ -lm
 
 %.o: %.c

@@ -1,8 +1,9 @@
+#include <time.h>
 #include "fichier.h"
 #include "listeVO.h"
 #include "jeu.h"
-#include <time.h>
 #include "donnees.h"
+#include "menu.h"
 
 int main(){
     srand(time(NULL));
@@ -18,7 +19,7 @@ int main(){
     initStructsVO(l);
     lectureFichiersVO(l);
 
-    game(l);
+    menu(l);
 
     ecritureFichiers(l);
     freeStructures(l);
