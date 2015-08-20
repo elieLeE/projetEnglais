@@ -67,21 +67,27 @@ void lectureFichierVO(FILE *f, struct L_coupleVoc *l){
 }
 
 void ecritureFichiers(struct L_coupleVoc l[]){
-    int i = 0;
-    FILE *tabF[TAILLE_HACHTAB];
+    int i = 0, compteur = 0;
+    FILE *tabF[TAILLE_HACHTAB], *fConfig = NULL;
     ouvertureFichiers(tabF, "w+");
     for(i=0; i<nbreListe; i++){
-	ecritureFichier(tabF[i], l[i]);
+	compteur += ecritureFichier(tabF[i], l[i]);
     }
+    ouvertureFichier(&fConfig, FICHIER_CONFIG, "w+");
+    fprintf(fConfig, "%d", compteur);
+    fclose(fConfig);
     fermetureFichiers(tabF);
 }
 
-void ecritureFichier(FILE* f, struct L_coupleVoc l){
+int ecritureFichier(FILE* f, struct L_coupleVoc l){
+    int compteur = 0;
     struct E_coupleVoc *p = l.first;
     while(p!=NULL){
 	fprintf(f, "%s %s\n", p->motFr, p->motEn);
 	p = p->suiv;
+	compteur++;
     }
+    return compteur;
 }
 
 void fermetureFichiers(FILE* tab[]){
@@ -91,6 +97,26 @@ void fermetureFichiers(FILE* tab[]){
     }
 }
 
-void fermetureFichiersVI(FILE tab[]){
+void lectureStats(int *nbreQ, int *nbreRight){
+    FILE* fichStats = NULL;
+    ouvertureFichier(&fichStats, FICHIER_STATS, "r+");
+    if(fscanf(fichStats, "%d %d", nbreQ, nbreRight) != 2){
+	fprintf(stderr, "lecture fichier stats incorrecte, fichier : %s, ligne : %d\n", __FILE__, __LINE__);
+    }
+    fclose(fichStats);
+}
 
+void ecritureStats(int nbreQ, int nbreRight){
+    FILE* fichStats = NULL;
+    ouvertureFichier(&fichStats, FICHIER_STATS, "w+");
+    fprintf(fichStats, "%d %d", nbreQ, nbreRight);
+    fclose(fichStats);
+}
+
+void modifStats(int nbreQ, int nbreRight){
+    int nbreQTot = 0, nbreRightTot = 0;
+    lectureStats(&nbreQTot, &nbreRightTot);
+    nbreQTot += nbreQ;
+    nbreRightTot += nbreRight;
+    ecritureStats(nbreQTot, nbreRightTot);
 }
