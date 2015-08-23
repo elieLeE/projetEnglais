@@ -61,6 +61,7 @@ void menu(struct L_coupleVoc *l){
 		break;
 
 	    case MELANGER:
+		//melangeTabH(l);
 		printf("NOT YET IMPLEMENTED\n");
 		break;
 
@@ -95,8 +96,11 @@ void addCouples(struct L_coupleVoc *l){
 	viderBuffeur();
 
 	has = rand()%nbreListe;
+	//visuListeVO((l[has]).first);
 	assert((has >=0) && (has<nbreListe));
-	addFirstVO(&l[has], motFr, motEn);
+	addFirstVO(&(l[nbreListe-1]), motFr, motEn);
+	//addFirstVO(&(l[has]), motFr, motEn);
+
 
 	printf("\nsouhaitez-vous ajouter un autre couple ?\n");
 	printf("entrez 1 pour oui et 0 pour non\n");

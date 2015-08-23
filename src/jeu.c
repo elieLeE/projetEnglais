@@ -119,7 +119,7 @@ void choixMode(int *mode, int *diff){
 	viderBuffeur();
     }
     printf("avant le while\n");*/
-    diff = 0; 
+    //diff = 0; 
 }
 
 E_coupleVoc choixMot(struct L_coupleVoc l[], int *index, int diff){

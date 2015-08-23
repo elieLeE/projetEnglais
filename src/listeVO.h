@@ -15,6 +15,7 @@ void visuListeVO(struct E_coupleVoc *e);
 void freeStructures(struct L_coupleVoc *l);
 void freeStruct(E_coupleVoc *l);
 struct E_coupleVoc* searchElem (struct L_coupleVoc *l, const char*);
-void melange();
+void melangeTabH(struct L_coupleVoc *l);
+void melangeListe(struct L_coupleVoc *l);
 
 #endif
